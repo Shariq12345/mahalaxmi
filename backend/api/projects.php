@@ -5,7 +5,11 @@ header('Content-Type: application/json');
 require_once('../config/database.php');
 
 try {
-    $stmt = $pdo->query("
+    // Retrieve the category from the GET request
+    $category = isset($_GET['category']) ? trim($_GET['category']) : null;
+
+    // Base SQL query
+    $query = "
         SELECT 
             p.*,
             c.name as category_name,
@@ -13,9 +17,23 @@ try {
         FROM projects p
         LEFT JOIN categories c ON p.category_id = c.id
         LEFT JOIN project_images pi ON p.id = pi.project_id
-        GROUP BY p.id
-        ORDER BY p.created_at DESC
-    ");
+    ";
+
+    // Add filtering if category is provided
+    if ($category) {
+        $query .= " WHERE c.name = :category";
+    }
+
+    $query .= " GROUP BY p.id ORDER BY p.created_at DESC";
+
+    $stmt = $pdo->prepare($query);
+
+    // Bind the category parameter if applicable
+    if ($category) {
+        $stmt->bindParam(':category', $category, PDO::PARAM_STR);
+    }
+
+    $stmt->execute();
     $projects = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     // Transform image paths to full URLs
@@ -29,7 +47,7 @@ try {
             return 'http://localhost/mahalaxmi/app/backend/uploads/projects/' . $image;
         }, $additional_images);
 
-        // Add thumbnail as first image
+        // Add thumbnail as the first image
         array_unshift($project['images'], $project['thumbnail_url']);
     }
 

@@ -13,6 +13,9 @@ import ClientsPage from "./components/Clients";
 import ProjectsPage from "./components/ProjectsPage";
 import BlogPage from "./components/BlogPage";
 import BlogPost from "./components/BlogPost";
+import ResidentialPage from "./components/ResidentialPage";
+import CommercialPage from "./components/CommercialPage";
+import RetailPage from "./components/RetailPage";
 
 const Home = () => {
   return (
@@ -45,6 +48,9 @@ function App() {
             <Route path="/projects" element={<ProjectsPage />} />
             <Route path="/blog" element={<BlogPage />} />
             <Route path="/blog/:slug" element={<BlogPost />} />
+            <Route path="/projects/residential" element={<ResidentialPage />} />
+            <Route path="/projects/commercial" element={<CommercialPage />} />
+            <Route path="/projects/retail" element={<RetailPage />} />
           </Routes>
         </main>
         <Footer />

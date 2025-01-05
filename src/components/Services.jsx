@@ -112,14 +112,6 @@ const ServicesSection = () => {
                     ))}
                   </div>
                 </div>
-
-                {/* <Button
-                  className="mt-6 w-full bg-transparent hover:bg-[#8B7355] text-[#8B7355] hover:text-white border border-[#8B7355] rounded-md text-sm py-2"
-                  variant="outline"
-                >
-                  Learn More
-                  <ArrowRight className="ml-2 w-4 h-4" />
-                </Button> */}
               </div>
             </motion.div>
           ))}
