@@ -45,7 +45,6 @@ function App() {
             <Route path="/about" element={<AboutUs />} />
             <Route path="/contact" element={<CTASection />} />
             <Route path="/clients" element={<ClientsPage />} />
-            <Route path="/projects" element={<ProjectsPage />} />
             <Route path="/blog" element={<BlogPage />} />
             <Route path="/blog/:slug" element={<BlogPost />} />
             <Route path="/projects/residential" element={<ResidentialPage />} />
